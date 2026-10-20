@@ -324,10 +324,25 @@ class StartupTests(unittest.TestCase):
     def test_debian_executable_names(self):
         self.fzf()
         self.tool("fdfind", "printf 'fdfind-result\\n'")
-        self.tool("batcat")
+        self.tool("batcat", "printf '%s\\n' \"$@\"")
         self.run_zsh('''
           [[ $(eval "$FZF_CTRL_T_COMMAND") == fdfind-result ]] || exit 41
-          [[ $FZF_CTRL_T_OPTS == *batcat* ]]
+          [[ $FZF_CTRL_T_OPTS == *batcat* ]] || exit 42
+          [[ $(eval 'bat --plain "file with spaces"') == $'--plain\\nfile with spaces' ]] || exit 43
+          [[ $(eval 'fd config') == fdfind-result ]]
+        ''')
+
+    def test_native_bat_and_fd_take_precedence_over_debian_names(self):
+        self.fzf()
+        self.tool("bat", "printf 'native-bat\\n'")
+        self.tool("batcat", "exit 91")
+        self.tool("fd", "printf 'native-fd\\n'")
+        self.tool("fdfind", "exit 92")
+        self.run_zsh('''
+          [[ ! -v aliases[bat] && ! -v aliases[fd] ]] || exit 51
+          [[ $(eval 'bat') == native-bat && $(eval 'fd') == native-fd ]] || exit 52
+          [[ $(eval "$FZF_CTRL_T_COMMAND") == native-fd ]] || exit 53
+          [[ $FZF_CTRL_T_OPTS == *"'bat "* ]]
         ''')
 
 

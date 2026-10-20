@@ -38,8 +38,9 @@ symlinks are installed into the user's active home by these checks.
 - Follow docs/kali-linux.md on the intended image and architecture.
 - Run `bash scripts/check.sh --strict` with all intended tools installed.
 - Check VM graphics, scrolling, resizing and font availability.
-- Exercise tab/split shortcuts and same-directory launching.
-- Verify light/dark changes if the desktop reports appearance preferences.
+- Exercise directional focus, pane movement, resizing, focus toggle and tab selection.
+- Check explicit splits after switching to grid/stack and same-directory launching.
+- Verify Moon stays selected across desktop light/dark appearance changes.
 - Try Ctrl-R/Ctrl-T/Alt-C, previews, history sharing and man paging.
 - Check prompt markers and cursor behaviour after `reload` and nested Zsh.
 - Check SSH/root indicators in deliberately opened sessions.

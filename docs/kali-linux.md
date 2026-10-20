@@ -140,10 +140,10 @@ verify scrolling and resizing in your actual VM. Start with the hypervisor's
 supported graphics configuration and current guest tools. Avoid forcing latency
 or rendering settings without measurements.
 
-The dark theme is Rose Pine and light mode is Dawn. Automatic mode changes require
-Kitty 0.38+ and a desktop that reports its appearance preference. With no preference
-or older Kitty, the configured fallback is dark. The bundled theme files need no
-network download at startup.
+Rosé Pine Moon is the default in dark, light and no-preference modes. Older Kitty
+versions use the same Moon palette through the main config's fallback include.
+The bundled theme files need no network download at startup. See
+[usage](usage.md) for the 14 pt font default, tiling shortcuts and private overrides.
 
 For an opaque window, put `background_opacity 1.0` in your private
 `kitty.local.conf`. Use `kitty +list-fonts` and `fc-match` to diagnose missing icons.

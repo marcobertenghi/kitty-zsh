@@ -1,5 +1,5 @@
-# Rose Pine colours with explicit backgrounds remain legible in light/dark themes.
-palette = 'rose_pine'
+# Rose Pine Moon colours match Kitty's default theme.
+palette = 'rose_pine_moon'
 format = """
 [░▒▓](iris)\
 $os\
@@ -18,10 +18,10 @@ $time\
 [ ](fg:base)\
 \n$username$hostname$character"""
 
-[palettes.rose_pine]
-base = '#191724'
-surface = '#1f1d2e'
-overlay = '#26233a'
+[palettes.rose_pine_moon]
+base = '#232136'
+surface = '#2a273f'
+overlay = '#393552'
 foam = '#9ccfd8'
 iris = '#c4a7e7'
 gold = '#f6c177'

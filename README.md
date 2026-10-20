@@ -1,7 +1,7 @@
 # Kitty + Zsh
 
 A lightweight, feature-rich terminal setup for Kali Linux and macOS: Kitty splits
-and tabs, Rose Pine colours, a useful Zsh prompt, and fast file/content search.
+and tabs, Rosé Pine Moon colours, a useful Zsh prompt, and fast file/content search.
 No plugin framework and no downloads during shell startup.
 
 **[Install on Kali Linux](docs/kali-linux.md)** · [macOS](docs/macos.md) ·
@@ -30,10 +30,12 @@ you do not need to change your account's login shell.
 
 - Portable Zsh history, completion, prefix search, directory stack and keybindings.
 - Starship with Rose Pine styling, automatic OS icons, SSH hostname and root styling.
-- Kitty tabs, splits, current-directory launching and shell integration after `reload`.
-- fd/fdfind, ripgrep (`rg`), fzf, bat/batcat, eza and zoxide integration.
+- Kitty splits, grid/tall layouts, directional pane navigation and a focus toggle.
+- Numbered tabs, current-directory launching and shell integration after `reload`.
+- fd, ripgrep (`rg`), fzf, bat, eza and zoxide integration (Debian names aliased).
 - Autosuggestions and syntax highlighting, loaded without a plugin manager.
-- Rose Pine / Dawn theme files, including automatic appearance selection on Kitty 0.38+.
+- Rosé Pine Moon in every desktop appearance mode, with a matching Starship palette.
+- A 14 pt font, subtle transparency, rounded powerline tabs and clear pane borders.
 - Package manifests, font helper, config checks, backup/restore and CI tests.
 
 Only the small MIT-licensed Rose Pine colour files are vendored, with their

@@ -106,11 +106,13 @@ if (( $+commands[fd] )); then
   _zsh_fd=fd
 elif (( $+commands[fdfind] )); then
   _zsh_fd=fdfind
+  alias fd=fdfind
 fi
 if (( $+commands[bat] )); then
   _zsh_bat=bat
 elif (( $+commands[batcat] )); then
   _zsh_bat=batcat
+  alias bat=batcat
 fi
 
 # fzf: installed scripts update with the package, so no generated cache is needed.

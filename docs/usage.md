@@ -17,6 +17,11 @@
 | `dirs -v`, `cd -2` | Browse the directory stack |
 | `reload` | Replace the shell with a fresh Zsh |
 
+`bat` and `fd` are the commands to type on both platforms. If only Debian's
+`batcat` / `fdfind` executables are installed, Zsh supplies fallback aliases; native
+`bat` / `fd` executables take precedence. These aliases apply to interactive Zsh;
+scripts should detect the installed executable, as the fzf/man integration does.
+
 fd/fdfind is used for fzf file and directory searches when available. With no fd,
 ripgrep supplies the file list; fzf retains its default directory search. With
 neither, fzf uses its own defaults. Optional-tool shortcuts appear only when those
@@ -26,8 +31,7 @@ tools are installed. There are no aliases replacing rg, grep or find.
 rg 'pattern' .             # Search file contents; honours ignore files
 rg --files                # List searchable files
 fd config                 # Find matching filenames
-# Debian's executable may instead be named fdfind:
-fdfind config
+bat README.md             # Highlighted file viewer, also on Debian/Kali
 ```
 
 ## Kitty controls
@@ -35,14 +39,34 @@ fdfind config
 | Shortcut | Behaviour |
 | --- | --- |
 | Ctrl-Shift-Enter | New pane in the current directory |
-| Ctrl-Alt-Enter | Vertical split |
-| Ctrl-Alt-Shift-Enter | Horizontal split |
+| Ctrl-Alt-Enter | Side-by-side split (returns to splits layout first) |
+| Ctrl-Alt-Shift-Enter | Top/bottom split (returns to splits layout first) |
+| Ctrl-Alt-Arrow | Focus the pane in that direction |
+| Ctrl-Alt-Shift-Arrow | Move the pane in that direction (layout dependent) |
+| Ctrl-Shift-1 through 9 | Jump directly to a pane (Kitty defaults) |
+| Ctrl-Shift-F7 | Visually select a pane (Kitty default) |
+| Ctrl-Shift-Z | Focus current pane / restore previous layout |
+| Ctrl-Shift-R | Interactive pane resizing (Kitty default; follow onscreen keys) |
+| Ctrl-Alt-R | Reset pane sizes |
 | Ctrl-Shift-T | New tab in the current directory |
+| Ctrl-Alt-1 through 9 | Jump directly to a numbered tab |
+| Ctrl-Shift-Right / Left | Next / previous tab (Kitty defaults) |
+| Ctrl-Shift-W | Close current pane (Kitty default) |
 | Ctrl-Shift-] / Ctrl-Shift-[ | Next / previous pane |
-| Ctrl-Shift-L | Cycle splits, stack and tall layouts |
+| Ctrl-Shift-L | Cycle splits, stack, tall and grid layouts |
 | Ctrl-Shift-F5 | Reload Kitty config |
 | Ctrl-Shift-F6 | Show Kitty's current configuration/debug information |
 | Ctrl-Shift-H | Browse scrollback in a pager (Kitty default) |
+
+Start with Ctrl-Alt-Enter, then Ctrl-Alt-Shift-Enter for a three-pane workspace.
+Use Ctrl-Alt-Arrows to move between panes, and Ctrl-Shift-Z to give the active
+pane the whole tab temporarily. Stack shows one pane at a time; tall arranges a
+main pane beside a column; grid tiles panes automatically. Ctrl-Shift-Enter adds
+a pane using the current layout. Explicit split shortcuts switch to splits first
+because `vsplit` / `hsplit` placement only applies in that layout.
+
+On macOS, Alt means Option. Desktop or VM shortcuts may intercept key combinations;
+remap them in the private include if needed.
 
 Native tabs/splits require no tmux dependency. Defaults not listed here remain
 unchanged. See [Kitty's overview](https://sw.kovidgoyal.net/kitty/overview/).
@@ -79,14 +103,15 @@ integration separately.
 
 ```text
 # ~/.config/kitty/kitty.local.conf
-font_size 14
+font_size 16
 background_opacity 1.0
 ```
 
 Colour preferences come from the automatic theme files and may override colour
-settings in kitty.conf or the private include. Edit the theme files to change the
-palette. No-preference defaults to dark; point that file at the Dawn palette if
-your desktop reports no preference for its light appearance.
+settings in kitty.conf or the private include. All three files use Moon, keeping
+it selected in dark, light and no-preference modes. To opt into appearance switching,
+choose separate light/dark/no-preference themes with `kitten themes`. The files are
+symlinked to this checkout; saving a theme can therefore change tracked files.
 
 ## History and caches
 
@@ -110,11 +135,16 @@ persistent generated cache. Missing plugins/tools do not prevent shell startup.
 
 ## Style and performance
 
-Kitty selects Rose Pine / Dawn when the desktop reports dark / light preference
-and supports automatic themes. The Starship bar has explicit Rose Pine backgrounds;
-the success/error and SSH/root indicators use ANSI colours from the active theme.
-In the bundled Kitty themes ANSI green is Pine and red is Love, with variant-specific
-hex values.
+Kitty defaults to a 14 pt JetBrainsMono Nerd Font, 95% background opacity, 6 pt
+padding, visible pane outlines and rounded powerline tabs with numbers. Set
+`font_size 16` in the private include if you prefer larger text, or
+`background_opacity 1.0` for maximum contrast. These are built-in Kitty features
+and add no packages, background services or shell startup work.
+
+Kitty uses Rosé Pine Moon in every desktop appearance mode. The Starship bar has
+matching Moon backgrounds; the success/error and SSH/root indicators use ANSI
+colours from the active theme. In the bundled Kitty themes ANSI green is Pine and
+red is Love.
 
 For large repositories, use `starship timings` to check Git-status rendering before
 disabling features. Startup, prompt rendering and terminal rendering are distinct

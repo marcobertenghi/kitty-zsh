@@ -1,4 +1,4 @@
 # Copy to your Kitty config directory as kitty.local.conf; never installed automatically.
-# font_size 14
+# font_size 16
 # background_opacity 1.0
 # map ctrl+alt+enter launch --location=vsplit --cwd=current

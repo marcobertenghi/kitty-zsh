@@ -23,8 +23,8 @@ those separate installations.
 
 The three `kitty/*.auto.conf` files are copied from
 [Rosé Pine for Kitty](https://github.com/rose-pine/kitty), retrieved 20 October 2026.
-Dark and no-preference use `dist/rose-pine.conf`; light uses
-`dist/rose-pine-dawn.conf`. Author metadata is preserved. Their MIT licence and
+All three use `dist/rose-pine-moon.conf` so Moon stays selected regardless of the
+desktop's appearance preference. Author metadata is preserved. Their MIT licence and
 copyright notice are in [ROSE-PINE-LICENSE](../kitty/ROSE-PINE-LICENSE).
 
 The Starship bar retains the existing segmented arrangement, with the Rose Pine
