@@ -1,0 +1,101 @@
+# Rose Pine colours with explicit backgrounds remain legible in light/dark themes.
+palette = 'rose_pine'
+format = """
+[░▒▓](iris)\
+$os\
+[](bg:foam fg:iris)\
+$directory\
+[](fg:foam bg:overlay)\
+$git_branch\
+$git_status\
+[](fg:overlay bg:surface)\
+$nodejs\
+$rust\
+$golang\
+$php\
+[](fg:surface bg:base)\
+$time\
+[ ](fg:base)\
+\n$username$hostname$character"""
+
+[palettes.rose_pine]
+base = '#191724'
+surface = '#1f1d2e'
+overlay = '#26233a'
+foam = '#9ccfd8'
+iris = '#c4a7e7'
+gold = '#f6c177'
+
+[os]
+disabled = false
+style = 'fg:base bg:iris'
+format = '[ $symbol ]($style)'
+
+[os.symbols]
+Macos = ''
+Kali = ''
+Debian = ''
+Linux = ''
+
+[directory]
+style = 'fg:base bg:foam'
+format = '[ $path ]($style)'
+truncation_length = 3
+truncation_symbol = '…/'
+
+[directory.substitutions]
+Documents = '󰈙 '
+Downloads = ' '
+Music = ' '
+Pictures = ' '
+
+[git_branch]
+symbol = ''
+style = 'fg:iris bg:overlay'
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+style = 'fg:iris bg:overlay'
+format = '[($all_status$ahead_behind )]($style)'
+
+[nodejs]
+symbol = ''
+style = 'fg:foam bg:surface'
+format = '[ $symbol ($version) ]($style)'
+
+[rust]
+symbol = ''
+style = 'fg:foam bg:surface'
+format = '[ $symbol ($version) ]($style)'
+
+[golang]
+symbol = ''
+style = 'fg:foam bg:surface'
+format = '[ $symbol ($version) ]($style)'
+
+[php]
+symbol = ''
+style = 'fg:foam bg:surface'
+format = '[ $symbol ($version) ]($style)'
+
+[time]
+disabled = false
+time_format = '%R'
+style = 'fg:gold bg:base'
+format = '[  $time ]($style)'
+
+# Show the user for SSH/root sessions; colour root distinctly.
+[username]
+show_always = false
+style_user = 'bold yellow'
+style_root = 'bold red'
+format = '[$user]($style) '
+
+[hostname]
+ssh_only = true
+style = 'bold magenta'
+format = '[@$hostname]($style) '
+
+[character]
+success_symbol = '[❯](bold green)'
+error_symbol = '[❯](bold red)'

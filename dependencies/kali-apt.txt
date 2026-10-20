@@ -1,0 +1,22 @@
+# Packages for installation, shell features and previews (one package per line).
+zsh
+kitty
+git
+curl
+ca-certificates
+tar
+xz-utils
+fontconfig
+less
+man-db
+bsdextrautils
+ncurses-bin
+fzf
+fd-find
+ripgrep
+bat
+eza
+zoxide
+zsh-autosuggestions
+zsh-syntax-highlighting
+# Starship is checked separately; see docs/kali-linux.md.

@@ -1,0 +1,5 @@
+# Copy to ${ZDOTDIR:-$HOME}/.zshrc.local; this file is never installed automatically.
+# Keep your private copy out of version control.
+# export EDITOR=nvim
+# ZSH_AUTOSUGGEST_STRATEGY=(history)
+# ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=120

@@ -1,0 +1,34 @@
+name: Checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  config-and-install:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install check tools (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y zsh shellcheck kitty
+      - name: Install check tools (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install shellcheck
+          brew install --cask kitty
+      - name: Shell syntax
+        run: |
+          bash -n install.sh
+          for script in scripts/*.sh; do bash -n "$script"; done
+          zsh -n zsh/.zshrc
+          zsh -n zsh/.zprofile
+      - name: ShellCheck
+        run: shellcheck install.sh scripts/*.sh
+      - name: Installer tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Kitty configuration
+        run: bash scripts/validate-kitty.sh
