@@ -1,4 +1,9 @@
 # Copy to your Kitty config directory as kitty.local.conf; never installed automatically.
 # font_size 16
 # background_opacity 1.0
+# Restore the OS titlebar and window frame (restart Kitty):
+# hide_window_decorations no
+# window_padding_width 8
+# Disable the golden cursor trail:
+# cursor_trail 0
 # map ctrl+alt+enter launch --location=vsplit --cwd=current

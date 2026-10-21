@@ -135,16 +135,35 @@ persistent generated cache. Missing plugins/tools do not prevent shell startup.
 
 ## Style and performance
 
-Kitty defaults to a 14 pt JetBrainsMono Nerd Font, 95% background opacity, 6 pt
+Kitty defaults to a 14 pt JetBrainsMono Nerd Font, 95% background opacity, 8 pt
 padding, visible pane outlines and rounded powerline tabs with numbers. Set
 `font_size 16` in the private include if you prefer larger text, or
 `background_opacity 1.0` for maximum contrast. These are built-in Kitty features
 and add no packages, background services or shell startup work.
 
+The OS titlebar and outer window decorations are hidden with
+`hide_window_decorations yes`, the Kitty equivalent of Ghostty's hidden titlebar
+and disabled window decorations. `window_padding_width 8` sets both horizontal
+and vertical padding to 8 pt. Internal pane outlines and the tab bar stay visible
+for navigation. Restart Kitty after changing decorations; reloading alone is not
+reliable for this setting. The exact appearance depends on the OS/window manager.
+To restore the normal frame, set `hide_window_decorations no` in
+`kitty.local.conf` and restart. See
+[Kitty's decoration settings](https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.hide_window_decorations).
+
 Kitty uses Rosé Pine Moon in every desktop appearance mode. The Starship bar has
 matching Moon backgrounds; the success/error and SSH/root indicators use ANSI
 colours from the active theme. In the bundled Kitty themes ANSI green is Pine and
 red is Love.
+
+The cursor and its short native trail use Moon Gold (`#f6c177`) in every
+appearance mode. A dark cursor text colour keeps block-cursor text readable.
+The trail uses a 3 ms trigger delay, 100–250 ms decay and a two-cell movement
+threshold to avoid animating each small typing movement. Cursor trails require
+Kitty 0.37+ and use its built-in renderer, with no plugins or custom shaders.
+Set `cursor_trail 0` in `kitty.local.conf` to disable the animation, or increase
+`cursor_trail_decay` for a longer trail. Reload with Ctrl-Shift-F5.
+See [Kitty's cursor settings](https://sw.kovidgoyal.net/kitty/conf/#cursor-trail).
 
 For large repositories, use `starship timings` to check Git-status rendering before
 disabling features. Startup, prompt rendering and terminal rendering are distinct

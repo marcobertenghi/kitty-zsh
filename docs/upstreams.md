@@ -26,6 +26,8 @@ The three `kitty/*.auto.conf` files are copied from
 All three use `dist/rose-pine-moon.conf` so Moon stays selected regardless of the
 desktop's appearance preference. Author metadata is preserved. Their MIT licence and
 copyright notice are in [ROSE-PINE-LICENSE](../kitty/ROSE-PINE-LICENSE).
+The local cursor accent uses Moon Gold (`#f6c177`), with Moon Base (`#232136`)
+for text beneath a block cursor; other upstream colours are unchanged.
 
 The Starship bar retains the existing segmented arrangement, with the Rose Pine
 palette and portable context indicators. This project's own files are covered by
