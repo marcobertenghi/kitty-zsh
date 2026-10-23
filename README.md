@@ -7,6 +7,9 @@ No plugin framework and no downloads during shell startup.
 **[Install on Kali Linux](docs/kali-linux.md)** · [macOS](docs/macos.md) ·
 [Shortcuts and customisation](docs/usage.md)
 
+For matching Xfce styling, see the optional
+[Kali desktop guide](docs/kali-desktop.md): Moon theme, wallpapers, panel and launcher.
+
 ## Quick start on Kali
 
 From a permanent copy of this repository, as your normal user:
