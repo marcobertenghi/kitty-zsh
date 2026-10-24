@@ -159,10 +159,23 @@ fi
 
 # Aliases and man pages: retain working system defaults without extra packages.
 if (( $+commands[eza] )); then
-  alias ls='eza --group-directories-first'
-  alias ll='eza -lah --group-directories-first --git'
-  alias la='eza -a --group-directories-first'
-  alias lt='eza --tree --level=2 --git-ignore'
+  # The bare flag also supports older eza versions. Only emit links to a terminal,
+  # so pipelines and redirected listings stay plain text on those versions too.
+  _kitty_zsh_eza() {
+    if [[ -t 1 ]]; then
+      command eza --hyperlink "$@"
+    else
+      command eza "$@"
+    fi
+  }
+  # Retain eza's argument completion when its packaged completion is available.
+  if (( ${+_comps[eza]} )); then
+    compdef "${_comps[eza]}" _kitty_zsh_eza
+  fi
+  alias ls='_kitty_zsh_eza --group-directories-first'
+  alias ll='_kitty_zsh_eza -lah --group-directories-first --git'
+  alias la='_kitty_zsh_eza -a --group-directories-first'
+  alias lt='_kitty_zsh_eza --tree --level=2 --git-ignore'
 else
   alias ll='ls -lah'
   alias la='ls -A'

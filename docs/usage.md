@@ -34,6 +34,26 @@ fd config                 # Find matching filenames
 bat README.md             # Highlighted file viewer, also on Debian/Kali
 ```
 
+With eza installed, `ls`, `ll`, `la` and `lt` emit clickable filename links when
+their output goes to a terminal. Kitty renders these OSC 8 hyperlinks; the listing
+tool creates them. Use **Ctrl-Shift-left-click** to open a linked file or directory
+with the configured URL handler (normally the desktop's associated application).
+A plain left-click also opens links when no selection is active. Opening a linked
+directory does not run `cd` in your current shell. Right-click still copies selected
+text, and Ctrl-Shift-V pastes it.
+
+The small eza wrapper adds `--hyperlink` only when stdout is a terminal, supporting
+older eza releases as well. Piped/redirected listings stay free of hyperlink escape
+sequences. Without eza, the existing system-ls fallback remains available. No new
+package is required beyond the existing eza dependency. See
+[eza's hyperlink option](https://eza.rocks/) and
+[Kitty hyperlink support](https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.allow_hyperlinks).
+
+Local checks with eza 0.23.5 verified terminal hyperlinks, filenames with spaces,
+and plain piped output. That version leaves `#` unescaped in filename URLs, which
+can be interpreted as a URL fragment; open such files by their normal path if a
+click fails. Actual desktop opening still depends on your Kali file associations.
+
 ## Kitty controls
 
 | Shortcut | Behaviour |
@@ -41,6 +61,7 @@ bat README.md             # Highlighted file viewer, also on Debian/Kali
 | Right-click with text selected | Copy selected text to the system clipboard |
 | Ctrl-Shift-C | Copy selected text (Kitty default) |
 | Ctrl-Shift-V | Paste from the system clipboard (Kitty default) |
+| Ctrl-Shift-left-click a link | Open a linked filename or URL (Kitty default) |
 | Ctrl-Shift-Enter | New pane in the current directory |
 | Ctrl-Alt-Enter | Side-by-side split (returns to splits layout first) |
 | Ctrl-Alt-Shift-Enter | Top/bottom split (returns to splits layout first) |

@@ -36,6 +36,7 @@ you do not need to change your account's login shell.
 - Kitty splits, grid/tall layouts, directional pane navigation and a focus toggle.
 - Numbered tabs, current-directory launching and shell integration after `reload`.
 - fd, ripgrep (`rg`), fzf, bat, eza and zoxide integration (Debian names aliased).
+- Clickable filenames in `ls`, `ll`, `la` and `lt` when eza is installed.
 - Autosuggestions and syntax highlighting, loaded without a plugin manager.
 - Rosé Pine Moon in every desktop appearance mode, with a matching Starship palette.
 - An 18 pt font, right-click copying, subtle transparency and rounded powerline tabs.
