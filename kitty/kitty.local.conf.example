@@ -1,5 +1,5 @@
 # Copy to your Kitty config directory as kitty.local.conf; never installed automatically.
-# font_size 16
+# font_size 18
 # background_opacity 1.0
 # Restore the OS titlebar and window frame (restart Kitty):
 # hide_window_decorations no

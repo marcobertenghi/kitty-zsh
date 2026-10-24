@@ -143,7 +143,7 @@ or rendering settings without measurements.
 Rosé Pine Moon is the default in dark, light and no-preference modes. Older Kitty
 versions use the same Moon palette through the main config's fallback include.
 The bundled theme files need no network download at startup. See
-[usage](usage.md) for the 14 pt font default, tiling shortcuts and private overrides.
+[usage](usage.md) for the 18 pt font default, tiling shortcuts and private overrides.
 
 For an opaque window, put `background_opacity 1.0` in your private
 `kitty.local.conf`. Use `kitty +list-fonts` and `fc-match` to diagnose missing icons.

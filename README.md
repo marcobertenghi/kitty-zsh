@@ -38,7 +38,7 @@ you do not need to change your account's login shell.
 - fd, ripgrep (`rg`), fzf, bat, eza and zoxide integration (Debian names aliased).
 - Autosuggestions and syntax highlighting, loaded without a plugin manager.
 - Rosé Pine Moon in every desktop appearance mode, with a matching Starship palette.
-- A 14 pt font, subtle transparency, rounded powerline tabs and clear pane borders.
+- An 18 pt font, right-click copying, subtle transparency and rounded powerline tabs.
 - Package manifests, font helper, config checks, backup/restore and CI tests.
 
 Only the small MIT-licensed Rose Pine colour files are vendored, with their

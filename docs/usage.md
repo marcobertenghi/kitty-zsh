@@ -38,6 +38,9 @@ bat README.md             # Highlighted file viewer, also on Debian/Kali
 
 | Shortcut | Behaviour |
 | --- | --- |
+| Right-click with text selected | Copy selected text to the system clipboard |
+| Ctrl-Shift-C | Copy selected text (Kitty default) |
+| Ctrl-Shift-V | Paste from the system clipboard (Kitty default) |
 | Ctrl-Shift-Enter | New pane in the current directory |
 | Ctrl-Alt-Enter | Side-by-side split (returns to splits layout first) |
 | Ctrl-Alt-Shift-Enter | Top/bottom split (returns to splits layout first) |
@@ -71,6 +74,13 @@ remap them in the private include if needed.
 Native tabs/splits require no tmux dependency. Defaults not listed here remain
 unchanged. See [Kitty's overview](https://sw.kovidgoyal.net/kitty/overview/).
 
+Select text with the left mouse button, then right-click to copy it. Paste with
+Ctrl-Shift-V in Kitty, Ctrl-V in ordinary Linux GUI apps, or Cmd-V on macOS.
+This uses the system clipboard, so the copied text remains available after you
+clear the highlight. Shift-left-click still extends a selection. Mouse-aware
+terminal programs retain their right-click handling; use Ctrl-Shift-C to copy a
+Kitty selection there. See [Kitty's copy/paste actions](https://sw.kovidgoyal.net/kitty/actions/#copy-paste).
+
 ## Private overrides
 
 Create private copies only if they do not exist:
@@ -103,7 +113,7 @@ integration separately.
 
 ```text
 # ~/.config/kitty/kitty.local.conf
-font_size 16
+font_size 18
 background_opacity 1.0
 ```
 
@@ -135,9 +145,9 @@ persistent generated cache. Missing plugins/tools do not prevent shell startup.
 
 ## Style and performance
 
-Kitty defaults to a 14 pt JetBrainsMono Nerd Font, 95% background opacity, 8 pt
-padding, visible pane outlines and rounded powerline tabs with numbers. Set
-`font_size 16` in the private include if you prefer larger text, or
+Kitty defaults to an 18 pt JetBrainsMono Nerd Font, 95% background opacity, 8 pt
+padding, visible pane outlines and rounded powerline tabs with numbers. Override
+`font_size` in the private include to adjust text size, or set
 `background_opacity 1.0` for maximum contrast. These are built-in Kitty features
 and add no packages, background services or shell startup work.
 
