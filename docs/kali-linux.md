@@ -115,12 +115,15 @@ installed shell-integration resources are available.
 
 | Shortcut / command | Purpose |
 | --- | --- |
-| Ctrl-Shift-Enter | New pane in the current directory |
+| Ctrl-Shift-Enter | Add a pane in Tall; press twice for the three-pane layout |
 | Ctrl-Alt-Enter | Vertical split |
 | Ctrl-Alt-Shift-Enter | Horizontal split |
 | Ctrl-Shift-T | New tab in the current directory |
 | Ctrl-Shift-] / Ctrl-Shift-[ | Next / previous pane (Kitty defaults) |
-| Ctrl-Shift-L | Cycle split, stack and tall layouts |
+| Ctrl-Alt-Arrow | Focus a neighbouring pane |
+| Ctrl-Alt-Shift-Arrow | Rearrange the active pane |
+| Ctrl-Shift-Z | Zoom the active pane / restore layout |
+| Ctrl-Shift-L | Cycle tall, splits, stack and grid layouts |
 | Ctrl-R | Fuzzy history search |
 | Ctrl-T | Select files; bat preview where available |
 | Alt-C | Select a directory |
@@ -130,8 +133,11 @@ installed shell-integration resources are available.
 | `z name`, `zi` | zoxide navigation |
 | `reload` | Fresh Zsh session with Kitty integration |
 
-Use [private overrides](usage.md#private-overrides) for shortcuts intercepted by
-the VM host or desktop. Do not repeatedly source `.zshrc`; use `reload`.
+Keep Kitty's Ctrl-Alt navigation shortcuts and
+[remap conflicting Xfce workspace shortcuts](kali-desktop.md#kitty-panes-and-xfce-workspaces)
+to Alt-Super combinations. The [usage guide](usage.md#kitty-controls) explains
+focus, rearrangement, tabs and the default 60/40 Tall layout. Do not repeatedly
+source `.zshrc`; use `reload`.
 
 ## VM and appearance notes
 

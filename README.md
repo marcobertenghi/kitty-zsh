@@ -33,7 +33,8 @@ you do not need to change your account's login shell.
 
 - Portable Zsh history, completion, prefix search, directory stack and keybindings.
 - Starship with Rose Pine styling, automatic OS icons, SSH hostname and root styling.
-- Kitty splits, grid/tall layouts, directional pane navigation and a focus toggle.
+- Kitty Tall layout: one main pane and a right-hand stack, plus manual splits/grid.
+- One-key pane creation, directional pane navigation/rearrangement and a focus toggle.
 - Numbered tabs, current-directory launching and shell integration after `reload`.
 - fd, ripgrep (`rg`), fzf, bat, eza and zoxide integration (Debian names aliased).
 - Clickable filenames in `ls`, `ll`, `la` and `lt` when eza is installed.

@@ -206,6 +206,73 @@ to input-language switching, choose a different shortcut or reassign it delibera
 
 Reference: [Application Finder preferences](https://docs.xfce.org/xfce/xfce4-appfinder/preferences).
 
+## Kitty panes and Xfce workspaces
+
+A Kitty **pane** is a terminal inside a tab. A **tab** contains panes. An Xfce
+**workspace** is an entire desktop containing application windows. Kitty cannot
+receive a shortcut that Xfce has already captured globally.
+
+Kali's [shipped Xfce shortcuts](https://gitlab.com/kalilinux/packages/kali-themes/-/blob/kali/master/etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml)
+include Ctrl-Alt-Arrows for desktop workspace switching, Ctrl-Alt-Shift-Arrows for
+moving whole application windows between workspaces, and Ctrl-Alt-1 through 9 for
+selecting numbered workspaces. Those conflict with this project's Kitty controls.
+Keep Kitty's controls and change the Xfce bindings.
+
+Recommended pattern: **Ctrl-Alt** controls terminals; **Alt-Super** controls
+desktop workspaces; adding **Shift** moves the terminal/window instead of focus.
+Super is normally the Windows-logo key. This also leaves Super-number Docklike
+shortcuts, Super-Space launching, and Kali's existing Ctrl-Super window shortcuts
+available.
+
+Inside your Kali Xfce session, open **Settings → Window Manager → Keyboard**.
+Change the existing actions using these mappings (wording varies slightly by
+Xfce version):
+
+| Xfce action | Replace the old binding with |
+| --- | --- |
+| Left workspace | Alt-Super-Left |
+| Right workspace | Alt-Super-Right |
+| Upper workspace | Alt-Super-Up |
+| Bottom/lower workspace | Alt-Super-Down |
+| Move window to left workspace | Alt-Super-Shift-Left |
+| Move window to right workspace | Alt-Super-Shift-Right |
+| Move window to upper workspace | Alt-Super-Shift-Up |
+| Move window to bottom/lower workspace | Alt-Super-Shift-Down |
+| Workspace 1 through 9 | Alt-Super-1 through 9 |
+| Move window to workspace 1 through 9 (optional) | Alt-Super-Shift-1 through 9 |
+
+Double-click an action's current shortcut and press the new combination. Edit the
+existing binding rather than merely adding another one: the old Ctrl-Alt binding
+must be removed to free the key for Kitty. Change all of Workspace 1 through 9,
+even if you currently use fewer desktops, since unused workspace shortcuts can
+still grab keys. Reassign any additional custom global bindings using those same
+Kitty combinations as well.
+
+To inspect the bindings actually present in your session:
+
+```sh
+xfconf-query -c xfce4-keyboard-shortcuts -lv
+```
+
+`<Primary>` means Ctrl; `<Super>` is the Windows-logo key. Inspect the `/xfwm4/custom/`
+entries for your active overrides; `/xfwm4/default/` entries are the supplied
+defaults and may remain visible after a GUI change. Use the GUI's displayed active
+shortcut and an actual keypress to confirm the result. If a proposed new binding
+is already used by a custom action, reassign that action or choose a free variant.
+
+After updating this project's configuration, reload Kitty with Ctrl-Shift-F5.
+Open a fresh tab, or press Ctrl-Shift-Enter to switch the current tab to Tall and
+add a pane. Starting with one pane, two presses produce a full-height main pane on
+the left and two stacked panes on the right. Ctrl-Alt-Arrows should focus Kitty
+panes; Alt-Super-Arrows should change the desktop workspace. Add Shift to move
+the corresponding pane or application window.
+
+The remapping is a one-time Xfce desktop setting. The terminal installer does not
+change global shortcuts, and the Linux session cannot be configured from this
+Mac checkout alone. For more detail, see
+[Kitty controls](usage.md#kitty-controls) and
+[Xfce keyboard settings](https://docs.xfce.org/xfce/xfwm4/keyboard_shortcuts).
+
 ## Check the result
 
 Open Thunar and Application Finder, check that both use Moon, and verify that

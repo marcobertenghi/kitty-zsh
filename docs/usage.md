@@ -62,11 +62,11 @@ click fails. Actual desktop opening still depends on your Kali file associations
 | Ctrl-Shift-C | Copy selected text (Kitty default) |
 | Ctrl-Shift-V | Paste from the system clipboard (Kitty default) |
 | Ctrl-Shift-left-click a link | Open a linked filename or URL (Kitty default) |
-| Ctrl-Shift-Enter | New pane in the current directory |
+| Ctrl-Shift-Enter | Add a pane in Tall, in the current directory |
 | Ctrl-Alt-Enter | Side-by-side split (returns to splits layout first) |
 | Ctrl-Alt-Shift-Enter | Top/bottom split (returns to splits layout first) |
 | Ctrl-Alt-Arrow | Focus the pane in that direction |
-| Ctrl-Alt-Shift-Arrow | Move the pane in that direction (layout dependent) |
+| Ctrl-Alt-Shift-Arrow | Rearrange the active pane toward its neighbour |
 | Ctrl-Shift-1 through 9 | Jump directly to a pane (Kitty defaults) |
 | Ctrl-Shift-F7 | Visually select a pane (Kitty default) |
 | Ctrl-Shift-Z | Focus current pane / restore previous layout |
@@ -77,20 +77,57 @@ click fails. Actual desktop opening still depends on your Kali file associations
 | Ctrl-Shift-Right / Left | Next / previous tab (Kitty defaults) |
 | Ctrl-Shift-W | Close current pane (Kitty default) |
 | Ctrl-Shift-] / Ctrl-Shift-[ | Next / previous pane |
-| Ctrl-Shift-L | Cycle splits, stack, tall and grid layouts |
+| Ctrl-Shift-L | Cycle tall, splits, stack and grid layouts |
 | Ctrl-Shift-F5 | Reload Kitty config |
 | Ctrl-Shift-F6 | Show Kitty's current configuration/debug information |
 | Ctrl-Shift-H | Browse scrollback in a pager (Kitty default) |
 
-Start with Ctrl-Alt-Enter, then Ctrl-Alt-Shift-Enter for a three-pane workspace.
-Use Ctrl-Alt-Arrows to move between panes, and Ctrl-Shift-Z to give the active
-pane the whole tab temporarily. Stack shows one pane at a time; tall arranges a
-main pane beside a column; grid tiles panes automatically. Ctrl-Shift-Enter adds
-a pane using the current layout. Explicit split shortcuts switch to splits first
-because `vsplit` / `hsplit` placement only applies in that layout.
+The default is **Tall**, with one full-height main pane occupying about 60% of
+the width and the remaining panes stacked in the right-hand 40%. Starting with
+one terminal, press **Ctrl-Shift-Enter twice** to get three panes:
 
-On macOS, Alt means Option. Desktop or VM shortcuts may intercept key combinations;
-remap them in the private include if needed.
+```text
+                 60%                  40%
+┌────────────────────────────┬───────────────────┐
+│                            │         B         │
+│             A              ├───────────────────┤
+│                            │         C         │
+└────────────────────────────┴───────────────────┘
+```
+
+The first press adds B beside A; the second adds C below B. It takes two new-pane
+actions to go from one pane to three. The shortcut returns to Tall and appends new
+panes at the end, so it also works after zooming a pane or focusing A. A fourth
+pane would add another row on the right; there is no hard three-pane limit.
+
+**Focus** and **rearrangement** are different actions:
+
+- **Ctrl-Alt-Arrow** moves the input focus toward a neighbouring pane. For example,
+  Left from B or C focuses A; Up/Down switches between the two right-hand panes.
+  Right from A selects a right-hand neighbour using Kitty's focus history. Nothing
+  is physically moved or restarted.
+- **Ctrl-Alt-Shift-Arrow** moves the active terminal into a neighbouring position.
+  In Tall this swaps pane positions: Left from B exchanges it with A, promoting B
+  to the large main slot. Its shell and running command stay attached to it.
+- **Ctrl-Shift-1/2/3** selects a numbered pane directly. Numbers refer to pane
+  order, which can change when you rearrange panes.
+- **Ctrl-Shift-Z** shows the active pane alone (Stack); press again to restore
+  the previous layout. The other panes continue running.
+
+Tabs contain these panes. **Ctrl-Alt-1 through 9** selects a tab, while
+**Ctrl-Shift-Left/Right** selects the previous/next tab. Neither changes the Linux
+desktop workspace.
+
+For manual placement, Ctrl-Alt-Enter creates a side-by-side split and
+Ctrl-Alt-Shift-Enter creates a top/bottom split of the focused pane. Both switch to
+Splits first. Grid arranges panes automatically. See
+[Kitty's Tall and Splits layouts](https://sw.kovidgoyal.net/kitty/layouts/).
+
+Kali Xfce binds some of the same Ctrl-Alt shortcuts globally, including arrows and
+tab-number combinations. Keep the Kitty bindings and remap the desktop actions
+using [the Xfce instructions](kali-desktop.md#kitty-panes-and-xfce-workspaces).
+The desktop otherwise intercepts these keys before Kitty receives them. On macOS,
+Alt means Option; a VM host can also intercept shortcuts.
 
 Native tabs/splits require no tmux dependency. Defaults not listed here remain
 unchanged. See [Kitty's overview](https://sw.kovidgoyal.net/kitty/overview/).

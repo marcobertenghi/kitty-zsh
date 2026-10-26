@@ -6,4 +6,6 @@
 # window_padding_width 8
 # Disable the golden cursor trail:
 # cursor_trail 0
+# Use equal-width columns instead of the default 60/40 Tall layout:
+# enabled_layouts tall:bias=50;full_size=1,splits,stack,grid
 # map ctrl+alt+enter launch --location=vsplit --cwd=current

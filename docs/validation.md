@@ -39,6 +39,9 @@ symlinks are installed into the user's active home by these checks.
 - Run `bash scripts/check.sh --strict` with all intended tools installed.
 - Check VM graphics, scrolling, resizing and font availability.
 - Exercise directional focus, pane movement, resizing, focus toggle and tab selection.
+- From one pane, press Ctrl-Shift-Enter twice: main pane left, two rows on the right.
+- Add a pane while zoomed or focused on the main pane; it should return to Tall.
+- Free Kitty's Ctrl-Alt arrows/numbers from Xfce grabs; verify desktop shortcuts separately.
 - Check explicit splits after switching to grid/stack and same-directory launching.
 - Verify Moon stays selected across desktop light/dark appearance changes.
 - Try Ctrl-R/Ctrl-T/Alt-C, previews, history sharing and man paging.
