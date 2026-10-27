@@ -41,6 +41,7 @@ you do not need to change your account's login shell.
 - Autosuggestions and syntax highlighting, loaded without a plugin manager.
 - Rosé Pine Moon in every desktop appearance mode, with a matching Starship palette.
 - An 18 pt font, right-click copying, subtle transparency and rounded powerline tabs.
+- Aligned full pane outlines and 8 pt gaps, using a small embedded Python watcher.
 - Package manifests, font helper, config checks, backup/restore and CI tests.
 
 Only the small MIT-licensed Rose Pine colour files are vendored, with their
@@ -74,7 +75,7 @@ this project does not install one.
 | --- | --- |
 | `zsh/.zshrc`, `zsh/.zprofile` | `${ZDOTDIR:-$HOME}/` |
 | `starship/starship.toml` | `${XDG_CONFIG_HOME:-$HOME/.config}/starship.toml` |
-| `kitty/kitty.conf` and three `*.auto.conf` files | `${KITTY_CONFIG_DIRECTORY:-${XDG_CONFIG_HOME:-$HOME/.config}/kitty}/` |
+| `kitty/kitty.conf`, `aligned_borders.py` and three `*.auto.conf` files | `${KITTY_CONFIG_DIRECTORY:-${XDG_CONFIG_HOME:-$HOME/.config}/kitty}/` |
 
 Kitty uses the same configuration layout on Linux and macOS. The installer links
 individual files; other Kitty files, SSH settings, history and private overrides

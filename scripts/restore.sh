@@ -13,7 +13,7 @@ status=$(cat "$backup/status")
 [[ $status == active ]] || { printf 'Backup is not active: %s\n' "$status" >&2; exit 1; }
 keys=(); targets=(); originals=()
 while IFS=$'\t' read -r key target source original extra; do
-  case $key in zshrc|zprofile|starship|kitty|kitty-dark|kitty-light|kitty-default) ;; *) printf 'Invalid backup entry.\n' >&2; exit 1 ;; esac
+  case $key in zshrc|zprofile|starship|kitty|kitty-dark|kitty-light|kitty-default|kitty-borders) ;; *) printf 'Invalid backup entry.\n' >&2; exit 1 ;; esac
   [[ $target == /* && $source == /* && -z $extra && ( $original == 0 || $original == 1 ) ]] || { printf 'Invalid manifest.\n' >&2; exit 1; }
   if [[ -e $target || -L $target ]]; then
     [[ -L $target && $(readlink "$target") == "$source" ]] || {

@@ -204,35 +204,44 @@ persistent generated cache. Missing plugins/tools do not prevent shell startup.
 ## Style and performance
 
 Kitty defaults to an 18 pt JetBrainsMono Nerd Font, 95% background opacity, 12 pt
-padding in split panes (8 pt in a single pane), continuous pane separators and
+padding in split panes (8 pt in a single pane), aligned full pane outlines and
 rounded powerline tabs with numbers. Override
 `font_size` in the private include to adjust text size, or set
-`background_opacity 1.0` for maximum contrast. These are built-in Kitty features
-and add no packages, background services or shell startup work.
+`background_opacity 1.0` for maximum contrast. These settings and the small border
+watcher add no packages, background services or shell startup work.
 
 The OS titlebar and outer window decorations are hidden with
 `hide_window_decorations yes`, the Kitty equivalent of Ghostty's hidden titlebar
 and disabled window decorations. `window_padding_width 12` sets both horizontal
 and vertical padding in split panes; `single_window_padding_width 8` keeps the
-single-pane inset compact. Internal pane separators and the tab bar stay visible
+single-pane inset compact. Internal pane outlines and the tab bar stay visible
 for navigation. Restart Kitty after changing decorations; reloading alone is not
 reliable for this setting. The exact appearance depends on the OS/window manager.
 To restore the normal frame, set `hide_window_decorations no` in
 `kitty.local.conf` and restart. See
 [Kitty's decoration settings](https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.hide_window_decorations).
 
-`draw_minimal_borders yes` uses continuous separators instead of full boxes around
-each pane. Kitty rounds terminal contents to whole character cells, so a full-height
-pane and a stack of shorter panes can have different leftover space: their full-box
-top/bottom edges may not line up. Separators avoid those uneven outer outlines.
-`placement_strategy top-left` also aligns the content starts, leaving leftover
-space at the bottom/right. The extra padding adds 4 pt per pane side around the
-separators compared with the previous 8 pt setting. Margins stay at zero because
-nonzero `window_margin_width` forces full boxes and brings the uneven edges back.
-These settings keep the 60/40 Tall workflow and its shortcuts. Reload with
-Ctrl-Shift-F5. To restore full outlines, set `draw_minimal_borders no` in the
-private include, accepting cell-grid rounding at the outer edges. See
-[Kitty's border and spacing settings](https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.draw_minimal_borders).
+`draw_minimal_borders no` keeps a complete outline around each pane.
+`window_margin_width 4` contributes 4 pt from each neighbor, making an 8 pt gap
+between outlines; `single_window_margin_width 0` avoids extra space in a single pane.
+Kitty rounds terminal contents to whole character cells. Its native full outlines
+exclude leftover space, which can stagger the edges of a full-height pane and a
+stack of shorter panes. `aligned_borders.py` includes that leftover space inside
+each outline, leaving the configured gap outside. It changes the border drawing
+view, without resizing terminal contents or changing the 60/40 Tall workflow.
+`placement_strategy top-left` keeps the content starts aligned too.
+
+The helper uses Kitty's [watcher mechanism](https://sw.kovidgoyal.net/kitty/launch/#watching-launched-windows)
+and embedded Python, with no separate Python installation or background process.
+It adapts Kitty's internal border drawing functions, which are not a stable public
+API; an incompatible geometry API falls back to native outlines. To disable the
+correction, set `env KITTY_ZSH_ALIGNED_BORDERS=0` in `kitty.local.conf` and restart.
+For shared separators instead, also set `window_margin_width 0` and
+`draw_minimal_borders yes`. See [Kitty's spacing settings](https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.window_margin_width).
+
+After updating an existing checkout, run `bash install.sh` once to link the new
+watcher file, then restart Kitty. Existing links are preserved. Later spacing
+changes can be reloaded with Ctrl-Shift-F5.
 
 Kitty uses Rosé Pine Moon in every desktop appearance mode. The Starship bar has
 matching Moon backgrounds; the success/error and SSH/root indicators use ANSI

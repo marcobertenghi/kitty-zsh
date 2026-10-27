@@ -6,9 +6,10 @@
 # Adjust split-pane breathing room (single panes default to 8 pt):
 # window_padding_width 12
 # single_window_padding_width 8
-# Full pane outlines, if preferred over continuous separators. Uneven cell-grid
-# rounding can offset their outer edges in Tall; nonzero margins also force boxes.
-# draw_minimal_borders no
+# Adjust the gap between full outlines (each pane contributes 4 pt by default):
+# window_margin_width 4
+# Disable the border alignment helper and use Kitty's native outlines:
+# env KITTY_ZSH_ALIGNED_BORDERS=0
 # Disable the golden cursor trail:
 # cursor_trail 0
 # Use equal-width columns instead of the default 60/40 Tall layout:

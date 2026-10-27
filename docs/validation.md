@@ -21,6 +21,10 @@ Tests run in temporary homes with fixture tools. They cover backups and restore,
 repeated install, dry-run, broken symlinks, custom XDG/ZDOTDIR/Kitty directories,
 private-file preservation, partial-failure rollback, apt manifests and font checks.
 Startup checks exercise optional dependencies and fzf fallbacks.
+Border tests check the drawing adapter and, when Kitty is available, 144 native
+Tall layout cases across pane counts, viewport sizes, cell sizes, scales and
+placement strategies. They reproduce the original stagger and check corrected
+top/bottom alignment, right-column widths and fixed gaps without changing content.
 
 Kitty's real configuration parser checks the main file, keybindings and all three
 theme files using its embedded Python. It does not open a graphical window or
@@ -33,6 +37,13 @@ Local checks use macOS and Zsh 5.9, with Kitty 0.49.2's parser and upstream shel
 integration loaded from a temporary application copy. No packages, fonts or config
 symlinks are installed into the user's active home by these checks.
 
+The outline helper was also exercised in a disposable, running Kitty 0.49.2 on
+macOS: 20 cases covering three/four panes, three window sizes, 16/18/22 pt fonts,
+Stack-to-Tall switching and pane removal. Native border rectangle coordinates
+confirmed aligned outer edges and equal gaps. Menlo was used because the requested
+Nerd Font was unavailable locally. Screenshot access to Kitty was unavailable;
+these were live geometry checks, not a visual inspection or a Kali VM test.
+
 ## Kali VM desktop checks still required
 
 - Follow docs/kali-linux.md on the intended image and architecture.
@@ -40,9 +51,10 @@ symlinks are installed into the user's active home by these checks.
 - Check VM graphics, scrolling, resizing and font availability.
 - Exercise directional focus, pane movement, resizing, focus toggle and tab selection.
 - From one pane, press Ctrl-Shift-Enter twice: main pane left, two rows on the right.
-- Check continuous pane separators at three and four panes, including after resizing
-  and changing font size. Split panes should have 12 pt padding, single panes 8 pt;
-  there should be no staggered full-box outlines at the outer top/bottom edges.
+- Re-run the installer to link aligned_borders.py and restart Kitty.
+- Check full outlines at three and four panes, including after resizing and changing
+  font size. Split panes should have 12 pt padding and 8 pt gaps, single panes 8 pt
+  padding with no margin; top/bottom outline edges should align across columns.
 - Add a pane while zoomed or focused on the main pane; it should return to Tall.
 - Free Kitty's Ctrl-Alt arrows/numbers from Xfce grabs; verify desktop shortcuts separately.
 - Check explicit splits after switching to grid/stack and same-directory launching.

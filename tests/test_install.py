@@ -67,6 +67,7 @@ class InstallerTests(unittest.TestCase):
             self.home / ".zprofile": REPO / "zsh/.zprofile",
             self.home / ".config/starship.toml": REPO / "starship/starship.toml",
             self.home / ".config/kitty/kitty.conf": REPO / "kitty/kitty.conf",
+            self.home / ".config/kitty/aligned_borders.py": REPO / "kitty/aligned_borders.py",
         }
         for dest, source in expected.items():
             self.assertTrue(dest.is_symlink())
@@ -94,6 +95,7 @@ class InstallerTests(unittest.TestCase):
         self.assertTrue((self.home / ".zprofile").is_symlink())
         self.assertEqual((self.home / ".zprofile").resolve(), previous.resolve())
         self.assertFalse((self.home / ".config/starship.toml").exists())
+        self.assertFalse((self.home / ".config/kitty/aligned_borders.py").exists())
         self.assertEqual(override.read_text(), "# private\n")
         self.assertEqual(history.read_text(), "private history\n")
         self.run_script("scripts/restore.sh", backup)

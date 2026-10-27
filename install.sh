@@ -21,13 +21,15 @@ case $(uname -s) in
   *) printf 'Supported platforms: macOS and Linux.\n' >&2; exit 1 ;;
 esac
 kitty_dir=${KITTY_CONFIG_DIRECTORY:-$config_home/kitty}
-keys=(zshrc zprofile starship kitty kitty-dark kitty-light kitty-default)
+keys=(zshrc zprofile starship kitty kitty-dark kitty-light kitty-default kitty-borders)
 sources=("$repo/zsh/.zshrc" "$repo/zsh/.zprofile" "$repo/starship/starship.toml"
   "$repo/kitty/kitty.conf" "$repo/kitty/dark-theme.auto.conf"
-  "$repo/kitty/light-theme.auto.conf" "$repo/kitty/no-preference-theme.auto.conf")
+  "$repo/kitty/light-theme.auto.conf" "$repo/kitty/no-preference-theme.auto.conf"
+  "$repo/kitty/aligned_borders.py")
 targets=("$zdotdir/.zshrc" "$zdotdir/.zprofile" "$config_home/starship.toml"
   "$kitty_dir/kitty.conf" "$kitty_dir/dark-theme.auto.conf"
-  "$kitty_dir/light-theme.auto.conf" "$kitty_dir/no-preference-theme.auto.conf")
+  "$kitty_dir/light-theme.auto.conf" "$kitty_dir/no-preference-theme.auto.conf"
+  "$kitty_dir/aligned_borders.py")
 changes=()
 for value in "$repo" "$HOME" "$config_home" "$state_home" "$zdotdir" "$kitty_dir"; do
   [[ $value == /* && $value != *$'\n'* && $value != *$'\t'* ]] || {
@@ -88,4 +90,4 @@ trap - ERR INT TERM
 printf '\nInstalled. Backups: %s\n' "$backup"
 printf 'Restore with: bash %q %q\n' "$repo/scripts/restore.sh" "$backup"
 printf 'Keep this repository in place; the installed files are symlinks.\n'
-printf 'Open a new Kitty tab, then reload Kitty configuration.\n'
+printf 'Restart Kitty to load the configuration and border watcher.\n'
