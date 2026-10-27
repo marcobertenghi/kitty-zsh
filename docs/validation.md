@@ -40,6 +40,9 @@ symlinks are installed into the user's active home by these checks.
 - Check VM graphics, scrolling, resizing and font availability.
 - Exercise directional focus, pane movement, resizing, focus toggle and tab selection.
 - From one pane, press Ctrl-Shift-Enter twice: main pane left, two rows on the right.
+- Check continuous pane separators at three and four panes, including after resizing
+  and changing font size. Split panes should have 12 pt padding, single panes 8 pt;
+  there should be no staggered full-box outlines at the outer top/bottom edges.
 - Add a pane while zoomed or focused on the main pane; it should return to Tall.
 - Free Kitty's Ctrl-Alt arrows/numbers from Xfce grabs; verify desktop shortcuts separately.
 - Check explicit splits after switching to grid/stack and same-directory launching.

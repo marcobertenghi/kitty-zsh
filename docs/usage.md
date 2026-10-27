@@ -203,21 +203,36 @@ persistent generated cache. Missing plugins/tools do not prevent shell startup.
 
 ## Style and performance
 
-Kitty defaults to an 18 pt JetBrainsMono Nerd Font, 95% background opacity, 8 pt
-padding, visible pane outlines and rounded powerline tabs with numbers. Override
+Kitty defaults to an 18 pt JetBrainsMono Nerd Font, 95% background opacity, 12 pt
+padding in split panes (8 pt in a single pane), continuous pane separators and
+rounded powerline tabs with numbers. Override
 `font_size` in the private include to adjust text size, or set
 `background_opacity 1.0` for maximum contrast. These are built-in Kitty features
 and add no packages, background services or shell startup work.
 
 The OS titlebar and outer window decorations are hidden with
 `hide_window_decorations yes`, the Kitty equivalent of Ghostty's hidden titlebar
-and disabled window decorations. `window_padding_width 8` sets both horizontal
-and vertical padding to 8 pt. Internal pane outlines and the tab bar stay visible
+and disabled window decorations. `window_padding_width 12` sets both horizontal
+and vertical padding in split panes; `single_window_padding_width 8` keeps the
+single-pane inset compact. Internal pane separators and the tab bar stay visible
 for navigation. Restart Kitty after changing decorations; reloading alone is not
 reliable for this setting. The exact appearance depends on the OS/window manager.
 To restore the normal frame, set `hide_window_decorations no` in
 `kitty.local.conf` and restart. See
 [Kitty's decoration settings](https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.hide_window_decorations).
+
+`draw_minimal_borders yes` uses continuous separators instead of full boxes around
+each pane. Kitty rounds terminal contents to whole character cells, so a full-height
+pane and a stack of shorter panes can have different leftover space: their full-box
+top/bottom edges may not line up. Separators avoid those uneven outer outlines.
+`placement_strategy top-left` also aligns the content starts, leaving leftover
+space at the bottom/right. The extra padding adds 4 pt per pane side around the
+separators compared with the previous 8 pt setting. Margins stay at zero because
+nonzero `window_margin_width` forces full boxes and brings the uneven edges back.
+These settings keep the 60/40 Tall workflow and its shortcuts. Reload with
+Ctrl-Shift-F5. To restore full outlines, set `draw_minimal_borders no` in the
+private include, accepting cell-grid rounding at the outer edges. See
+[Kitty's border and spacing settings](https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.draw_minimal_borders).
 
 Kitty uses Rosé Pine Moon in every desktop appearance mode. The Starship bar has
 matching Moon backgrounds; the success/error and SSH/root indicators use ANSI
