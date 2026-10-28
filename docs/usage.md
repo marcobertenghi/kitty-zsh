@@ -132,6 +132,56 @@ Alt means Option; a VM host can also intercept shortcuts.
 Native tabs/splits require no tmux dependency. Defaults not listed here remain
 unchanged. See [Kitty's overview](https://sw.kovidgoyal.net/kitty/overview/).
 
+### Startup window size
+
+Each new Kitty OS window starts at **3262×1635 pixels**, 85% of the intended
+3838×1923 Kali desktop's width and height. `remember_window_size no` and
+`remember_window_position no` stop Kitty from restoring its previous geometry.
+Initial placement remains with Xfce, which already centers new terminals in this
+setup. Open a new OS window or restart Kitty to check the startup size; existing
+windows are not resized by a config reload.
+
+Kitty's native startup dimensions accept pixels or character cells, not screen
+percentages. These values are fixed; for a different desktop resolution, override
+`initial_window_width` and `initial_window_height` in `kitty.local.conf`.
+See [Kitty's startup size settings](https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.initial_window_width).
+
+There is no added centering shortcut, kitten or window-control dependency.
+Repositioning an already moved window is a separate window-manager action. Xfce's
+standard shortcut list has no dedicated center-window action; a small optional
+function can be considered later if wanted.
+
+### Function keys and Penelope
+
+Unmodified F1-F12 are available to terminal applications. Penelope's default
+PTY detach key is F12, encoded as `ESC [ 24 ~`; under `cat -v` this appears as
+`^[[24~`. A function key is an escape sequence, so seeing it printed by `cat -v`
+is expected. Seeing a fragment typed at a shell prompt does not identify the key.
+
+The reported `^[[57436u` identifies **Previous Track**, not F12, even with Kitty's
+legacy keyboard mode active. This points to keyboard Fn mode or host/VM translation.
+The shared config translates that specific incoming event with
+`map media_track_previous send_key f12`. It sends a real F12 through Kitty's
+application-aware encoder rather than forcing escape bytes for every program.
+Consequently, Previous Track received by Kitty now acts as F12 too. Set
+`map media_track_previous no_op` in the private include to restore native media-key
+handling. This workaround does not repair the keyboard's entire function row.
+
+For the whole row, compare F12 with Fn/Globe+F12. If only the latter produces
+`^[[24~`, enable standard function keys in the host keyboard settings or use the
+keyboard's Fn-lock setting. The exact control depends on the keyboard and VM;
+do not assume Fn-Esc is supported. If a key never reaches Kitty, inspect the host,
+VM and Xfce shortcuts. To identify the incoming events, run `kitten show-key -m kitty`
+(older installations: `kitty +kitten show_key`), press the affected keys, then exit
+the diagnostic. Do not guess mappings for the rest of the row from F12 alone.
+
+After updating the checkout, reload Kitty with Ctrl-Shift-F5 and run `cat -v`.
+Press the reported F12 key, then Enter: expect `^[[24~`; Ctrl-C exits. Test Penelope's
+detach key in an authorized local lab session as well. The project does not change
+Penelope's configuration. See [Kitty's key definitions](https://sw.kovidgoyal.net/kitty/keyboard-protocol/#functional-key-definitions),
+[send_key](https://sw.kovidgoyal.net/kitty/actions/#action-send_key), and
+[Penelope's defaults](https://github.com/brightio/penelope/blob/main/penelope.py).
+
 Select text with the left mouse button, then right-click to copy it. Paste with
 Ctrl-Shift-V in Kitty, Ctrl-V in ordinary Linux GUI apps, or Cmd-V on macOS.
 This uses the system clipboard, so the copied text remains available after you

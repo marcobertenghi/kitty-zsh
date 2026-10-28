@@ -1,5 +1,8 @@
 # Copy to your Kitty config directory as kitty.local.conf; never installed automatically.
 # font_size 18
+# Startup size is 3262x1635 px (85% of 3838x1923); adjust for another resolution:
+# initial_window_width 3262
+# initial_window_height 1635
 # background_opacity 1.0
 # Restore the OS titlebar and window frame (restart Kitty):
 # hide_window_decorations no
@@ -10,6 +13,8 @@
 # window_margin_width 4
 # Disable the border alignment helper and use Kitty's native outlines:
 # env KITTY_ZSH_ALIGNED_BORDERS=0
+# Keep Previous Track as a media event instead of the VM's F12 fallback:
+# map media_track_previous no_op
 # Disable the golden cursor trail:
 # cursor_trail 0
 # Use equal-width columns instead of the default 60/40 Tall layout:

@@ -25,6 +25,9 @@ Border tests check the drawing adapter and, when Kitty is available, 144 native
 Tall layout cases across pane counts, viewport sizes, cell sizes, scales and
 placement strategies. They reproduce the original stagger and check corrected
 top/bottom alignment, right-column widths and fixed gaps without changing content.
+The function-key check uses Kitty's own parser and encoder to reproduce the
+reported Previous Track event (`CSI 57436 u`) and verify its F12 fallback emits
+Penelope's `ESC [ 24 ~` while preserving negotiated key-release reporting.
 
 Kitty's real configuration parser checks the main file, keybindings and all three
 theme files using its embedded Python. It does not open a graphical window or
@@ -47,8 +50,14 @@ these were live geometry checks, not a visual inspection or a Kali VM test.
 ## Kali VM desktop checks still required
 
 - Follow docs/kali-linux.md on the intended image and architecture.
+- Check Docklike's current-workspace filter with one Kitty window on each of two
+  workspaces: Super-number should select only the current workspace's window.
+  If activation freezes, compare with previews disabled and direct workspace
+  changes, and record the plugin/panel/Xfwm versions before attributing the cause.
 - Run `bash scripts/check.sh --strict` with all intended tools installed.
 - Check VM graphics, scrolling, resizing and font availability.
+- On the 3838×1923 Kali desktop, move/resize Kitty, close it, then reopen: check
+  the fixed 3262×1635 startup size and Xfce's centered initial placement.
 - Exercise directional focus, pane movement, resizing, focus toggle and tab selection.
 - From one pane, press Ctrl-Shift-Enter twice: main pane left, two rows on the right.
 - Re-run the installer to link aligned_borders.py and restart Kitty.
@@ -61,6 +70,10 @@ these were live geometry checks, not a visual inspection or a Kali VM test.
 - Verify Moon stays selected across desktop light/dark appearance changes.
 - Try Ctrl-R/Ctrl-T/Alt-C, previews, history sharing and man paging.
 - Check prompt markers and cursor behaviour after `reload` and nested Zsh.
+- Confirm physical F12 (and Fn/Globe+F12) under `cat -v` produces `^[[24~` after
+  the media-event fallback; verify Penelope's PTY detach key in a local lab.
+- Check the remaining F1-F11 events with `kitten show-key -m kitty`; Fn/VM mappings
+  and Xfce interception need checking on the actual keyboard and Kali VM.
 - Check SSH/root indicators in deliberately opened sessions.
 
 Local parser tests and Ubuntu CI do not establish actual Kali VM GUI performance.

@@ -153,6 +153,8 @@ reliably; package-installed applications normally do.
 Use **Ctrl-right-click → Properties** on Docklike. Recommended settings:
 
 - Icon size around 24 px in a 32 px panel.
+- Enable **Only show applications on the current workspace**. This keeps window
+  groups local to each workspace while retaining Super-number switching.
 - Window previews enabled.
 - A simple line or dot active indicator.
 - Custom active indicator colour `#f6c177` (Moon Gold), if offered by your version.
@@ -165,6 +167,51 @@ Docklike's optional Super-1, Super-2, etc. shortcuts select applications by thei
 position in the panel. They are distinct from Kitty's Ctrl-Alt-number tab shortcuts.
 If a desktop shortcut already uses Super-number, resolve that conflict in Xfce's
 keyboard settings first.
+
+### Docklike freezes when selecting windows on another workspace
+
+Windows from the same application being grouped together is normal. A freeze
+while activating that group is not. Docklike's activation code can explicitly
+switch to a window's workspace; the symptom alone does not establish whether the
+plugin, window manager, compositor or VM graphics is becoming unresponsive.
+
+First use **Ctrl-right-click → Properties → Only show applications on the current
+workspace**. Keep **Super-number application switching enabled** and the
+standalone Super-key action disabled. With a terminal on workspace 1 and another
+on workspace 2, the group should contain only the terminal on the current
+workspace. Switch workspaces explicitly using the workspace pager or the
+Alt-Super shortcuts below, then use Super-number within that workspace. Pin the
+applications you use so their dock positions remain predictable. This is a
+workaround that avoids cross-workspace activation, not a confirmed upstream fix.
+The workspace filter is an X11 option; upstream hides it on native Wayland.
+
+If it still freezes, turn **Show preview thumbnails for open windows** off and
+repeat with otherwise identical settings. If this alone helps, preview capture
+or the graphics/compositor path becomes a stronger suspect. Also compare with
+clicking the workspace pager directly: if that freezes without using Docklike,
+investigate Xfwm/compositor/VM graphics rather than just the Super-number binding.
+Note whether the mouse, other applications and direct workspace switching still
+respond; a stuck panel or input grab can look like a full VM freeze.
+
+Collect versions and the active desktop/session before choosing an update or
+version-specific workaround:
+
+```sh
+dpkg-query -W xfce4-docklike-plugin xfce4-panel xfwm4
+apt-cache policy xfce4-docklike-plugin xfce4-panel xfwm4
+printf 'Desktop: %s\nSession: %s\n' "$XDG_CURRENT_DESKTOP" "$XDG_SESSION_TYPE"
+```
+
+Report the VM application too. Check available Kali package updates against the
+installed versions; do not assume a newer upstream release fixes this exact
+symptom. No plugin source replacement or new background service is needed for
+the settings above. These are changes to the actual Kali panel; updating this
+repository alone does not apply them.
+
+Sources: [Docklike usage](https://docs.xfce.org/panel-plugins/xfce4-docklike-plugin/start),
+[workspace filtering](https://github.com/xfce-mirror/xfce4-docklike-plugin/blob/master/src/GroupWindow.cpp),
+[workspace activation](https://github.com/xfce-mirror/xfce4-docklike-plugin/blob/master/src/Xfw.cpp),
+and [release notes](https://github.com/xfce-mirror/xfce4-docklike-plugin/blob/master/NEWS).
 
 References: [Panel preferences](https://docs.xfce.org/xfce/xfce4-panel/preferences)
 and [Docklike usage](https://docs.xfce.org/panel-plugins/xfce4-docklike-plugin/start).
